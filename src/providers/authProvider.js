@@ -1,24 +1,31 @@
 import React from "react";
 import storage from "@/libs/storage";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { getUser } from "@/libs/api";
+import { getUser, login } from "@/libs/api";
 const AuthContext = React.createContext(null);
 const key = "auth-user";
+
 async function loadUser() {
-  console.log("loadUser");
   if (storage.getToken()) {
     const data = await getUser();
+    console.log("loadUser", data);
     return data;
   }
+  console.log("loadUser", null);
   return null;
 }
 
 async function loginFn(data) {
   console.log(data);
-  // const response = await loginWithEmailAndPassword(data);
-  // const user = await handleUserResponse(response);
-  // return user;
+
+  const user = await login(data);
+  storage.setToken(user.token);
   return data;
+}
+
+async function logoutFn() {
+  storage.clearToken();
+  window.location.assign(window.location.origin);
 }
 
 export function AuthProvider({ children }) {
@@ -35,14 +42,22 @@ export function AuthProvider({ children }) {
   });
 
   const setUser = React.useCallback(
-    (data: User) => queryClient.setQueryData(key, data),
+    (data) => queryClient.setQueryData(key, data),
     [queryClient]
   );
 
   const loginMutation = useMutation({
     mutationFn: loginFn,
     onSuccess: (user) => {
+      console.log("loginMutation success");
       setUser(user);
+    },
+  });
+
+  const logoutMutation = useMutation({
+    mutationFn: logoutFn,
+    onSuccess: () => {
+      queryClient.clear();
     },
   });
 
@@ -51,6 +66,7 @@ export function AuthProvider({ children }) {
       user,
       error,
       login: loginMutation.mutate, //mutateAsync相当于mutate ，本来需要这样调用mutation.mutate
+      logout: logoutMutation.mutate,
     };
   }, [user]);
 

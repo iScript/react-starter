@@ -1,9 +1,11 @@
 import { axios } from "@/libs/axios";
 
+import "@/mock/mockData.js";
+
 export const getUser = () => {
-  return axios.get("/api/guarantee/expose?order_no=111");
+  return axios.get("/user");
 };
 
-export const login = () => {
-  return axios.post("/api/login");
+export const login = (data) => {
+  return axios.post("/login", data);
 };

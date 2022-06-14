@@ -1,15 +1,18 @@
 import { AuthProvider, useAuth } from "@/providers/authProvider.js";
 import Abutton from "@/components/Button/AButton";
 
+const style = {
+  h1Style: "text-3xl underline",
+};
+
 export default function Index() {
-  var a = useAuth();
-  console.log("a.count");
-  console.log(a.count);
+  //var a = useAuth();
 
   return (
     <>
-      <div>index.. {a.count2} </div>
-      <Abutton></Abutton>
+      <div className=" group bg-[red] w-64 px-2.5">
+        <span className="group-hover:bg-[yellow] ">111</span>
+      </div>
     </>
   );
 }

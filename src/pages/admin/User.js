@@ -1,7 +1,7 @@
 export default function Index() {
   return (
     <>
-      <div>admin1..</div>
+      <div>user..</div>
     </>
   );
 }

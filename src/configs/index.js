@@ -1,2 +1,2 @@
-export const API_URL = "https://www.zgjmdbw.com";
+export const API_URL = "";
 export const TEST = "123456";

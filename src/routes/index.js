@@ -3,9 +3,10 @@ import IndexLayout from "@/components/Layout/IndexLayout";
 import AdminLayout from "@/components/Layout/AdminLayout";
 import Index from "@/pages/Index";
 import Login from "@/pages/Login";
-import Admin1 from "@/pages/Admin1";
-import Admin2 from "@/pages/Admin2";
 
+import Dashboard from "@/pages/admin/Dashboard";
+import User from "@/pages/admin/User";
+import Test from "@/pages/admin/Test";
 import { useAuth } from "@/providers/authProvider";
 
 export const AppRoutes = () => {
@@ -42,12 +43,16 @@ export const AppRoutes = () => {
       element: <AdminLayout />,
       children: [
         {
-          path: "1",
-          element: <Admin1 />,
+          path: "",
+          element: <Dashboard />,
         },
         {
-          path: "2",
-          element: <Admin2 />,
+          path: "user",
+          element: <User />,
+        },
+        {
+          path: "test",
+          element: <Test />,
         },
       ],
     },
