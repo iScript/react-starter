@@ -1,9 +1,9 @@
 import React from "react";
 import storage from "@/libs/storage";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getUser, login } from "@/libs/api";
 const AuthContext = React.createContext(null);
-const key = "auth-user";
+const key = ["auth-user"];
 
 async function loadUser() {
   if (storage.getToken()) {
@@ -74,6 +74,7 @@ export function AuthProvider({ children }) {
 }
 
 export function useAuth() {
+  // useContext 返回一个value值 ， 即user
   const context = React.useContext(AuthContext);
   if (!context) {
     throw new Error(`get context error`);

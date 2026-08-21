@@ -1,8 +1,8 @@
 import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { QueryClientProvider } from "react-query";
+import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from "@/libs/react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { HashRouter as Router } from "react-router-dom";
 import { AuthProvider } from "@/providers/authProvider.js";
 
@@ -28,7 +28,7 @@ export const AppProvider = ({ children }) => {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         {/* 配置react-query */}
         <QueryClientProvider client={queryClient}>
-          {process.env.NODE_ENV == "development" && <ReactQueryDevtools />}
+          {process.env.NODE_ENV == "development" && <ReactQueryDevtools initialIsOpen={false} />}
           <AuthProvider>
             <Router>{children}</Router>
           </AuthProvider>

@@ -3,7 +3,7 @@ import {
   UseQueryOptions,
   UseMutationOptions,
   DefaultOptions,
-} from "react-query";
+} from '@tanstack/react-query';
 
 const queryConfig = {
   queries: {
